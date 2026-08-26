@@ -61,6 +61,16 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Password Generator | Random passwords and passphrases with honest entropy estimates |
 | Random Picker | Numbers, dice, coins, list picking and shuffling |
 
+## Settings
+
+A gear icon in the home app bar opens Settings.
+
+**Appearance** chooses between *Follow system*, *Light* and *Dark*. The choice
+applies immediately, persists across restarts, and re-styles the status and
+navigation bar icons so they stay legible when you override the system setting.
+Dynamic colour still tracks the wallpaper on Android 12 and later in both
+themes.
+
 ## Permissions
 
 The app declares four permissions and nothing else:
@@ -130,7 +140,8 @@ app/src/main/java/com/utilitybox/app/
 │   ├── convert/             converters and encoders
 │   └── calculate/           calculators
 ├── ui/common/               shared scaffold, cards, rows, permission gate
-├── ui/theme/                Material 3 theme with dynamic colour
+├── ui/settings/             settings screen (appearance, about)
+├── ui/theme/                Material 3 theme, dynamic colour, theme preference
 └── util/                    formatting, audio engines, screen-on helper
 ```
 
@@ -144,7 +155,7 @@ that the id constants and the registry stay in step.
 - Single activity, Navigation Compose, no third-party analytics or ad SDKs
 - CameraX and ZXing for barcode scanning and generation (both used offline)
 - minSdk 24, targetSdk 36, R8 with resource shrinking on release
-- 40 unit tests covering unit conversion, Morse, formatting and the registry
+- 46 unit tests covering unit conversion, Morse, formatting, theme resolution and the registry
 
 ## Licence
 

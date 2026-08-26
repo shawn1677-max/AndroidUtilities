@@ -44,8 +44,10 @@ import com.utilitybox.app.tools.measure.RulerScreen
 import com.utilitybox.app.tools.measure.SoundMeterScreen
 import com.utilitybox.app.tools.measure.StopwatchScreen
 import com.utilitybox.app.tools.measure.TimerScreen
+import com.utilitybox.app.ui.settings.SettingsScreen
 
 private const val HOME = "home"
+private const val SETTINGS = "settings"
 private const val TRANSITION_MS = 220
 
 @Composable
@@ -65,10 +67,15 @@ fun UtilityBoxNavHost() {
         },
     ) {
         composable(HOME) {
-            HomeScreen(onOpenTool = { toolId -> navController.navigateToTool(toolId) })
+            HomeScreen(
+                onOpenTool = { toolId -> navController.navigateToTool(toolId) },
+                onOpenSettings = { navController.navigateToTool(SETTINGS) },
+            )
         }
 
         val back: () -> Unit = { navController.popBackStack() }
+
+        composable(SETTINGS) { SettingsScreen(back) }
 
         composable(ToolIds.DEVICE_INFO) { DeviceInfoScreen(back) }
         composable(ToolIds.BATTERY) { BatteryScreen(back) }
