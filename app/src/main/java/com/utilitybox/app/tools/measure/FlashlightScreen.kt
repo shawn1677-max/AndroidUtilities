@@ -1,7 +1,6 @@
 package com.utilitybox.app.tools.measure
 
 import android.content.Context
-import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -34,6 +33,8 @@ import com.utilitybox.app.ui.common.HintText
 import com.utilitybox.app.ui.common.LocalSnackbar
 import com.utilitybox.app.ui.common.SectionCard
 import com.utilitybox.app.ui.common.ToolScaffold
+import com.utilitybox.app.util.torchCameraId
+import com.utilitybox.app.widget.FlashlightWidgetProvider
 import kotlinx.coroutines.delay
 import java.util.Locale
 
@@ -57,7 +58,7 @@ fun FlashlightScreen(onBack: () -> Unit) {
     val cameraManager = remember {
         context.getSystemService(Context.CAMERA_SERVICE) as? CameraManager
     }
-    val torchId = remember { cameraManager?.findTorchCamera() }
+    val torchId = remember { cameraManager?.torchCameraId() }
 
     var enabled by remember { mutableStateOf(false) }
     var mode by remember { mutableStateOf(TorchMode.STEADY) }
@@ -68,6 +69,13 @@ fun FlashlightScreen(onBack: () -> Unit) {
     fun setTorch(on: Boolean) {
         val id = currentTorchId.value ?: return
         runCatching { cameraManager?.setTorchMode(id, on) }
+            .onSuccess {
+                // Steady mode is the only state worth mirroring; strobe and SOS
+                // flip too fast for a widget redraw to mean anything.
+                if (mode == TorchMode.STEADY) {
+                    FlashlightWidgetProvider.onTorchStateChanged(context, on)
+                }
+            }
             .onFailure { snackbar("The torch is in use by another app") }
     }
 
@@ -102,7 +110,10 @@ fun FlashlightScreen(onBack: () -> Unit) {
     }
 
     DisposableEffect(Unit) {
-        onDispose { runCatching { torchId?.let { cameraManager?.setTorchMode(it, false) } } }
+        onDispose {
+            runCatching { torchId?.let { cameraManager?.setTorchMode(it, false) } }
+            FlashlightWidgetProvider.onTorchStateChanged(context, false)
+        }
     }
 
     ToolScaffold(title = "Flashlight", onBack = onBack) {
@@ -169,15 +180,3 @@ fun FlashlightScreen(onBack: () -> Unit) {
         )
     }
 }
-
-/** Picks the first camera that reports a flash unit, preferring the back camera. */
-private fun CameraManager.findTorchCamera(): String? = runCatching {
-    val ids = cameraIdList
-    val withFlash = ids.filter { id ->
-        getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
-    }
-    withFlash.firstOrNull { id ->
-        getCameraCharacteristics(id).get(CameraCharacteristics.LENS_FACING) ==
-            CameraCharacteristics.LENS_FACING_BACK
-    } ?: withFlash.firstOrNull()
-}.getOrNull()
