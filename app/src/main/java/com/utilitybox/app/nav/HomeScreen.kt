@@ -22,6 +22,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Search
+import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -50,7 +51,10 @@ import com.utilitybox.app.tools.ToolRegistry
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(onOpenTool: (String) -> Unit) {
+fun HomeScreen(
+    onOpenTool: (String) -> Unit,
+    onOpenSettings: () -> Unit,
+) {
     var query by rememberSaveable { mutableStateOf("") }
 
     val sections: List<Pair<ToolCategory, List<Tool>>> = remember(query) {
@@ -71,6 +75,11 @@ fun HomeScreen(onOpenTool: (String) -> Unit) {
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
+                    }
+                },
+                actions = {
+                    IconButton(onClick = onOpenSettings) {
+                        Icon(Icons.Outlined.Settings, contentDescription = "Settings")
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
