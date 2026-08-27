@@ -63,6 +63,23 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--
+          Home screen flashlight widget. Toggling the torch uses
+          CameraManager.setTorchMode, which needs no camera permission.
+          Exported because the platform delivers widget broadcasts to it.
+        -->
+        <receiver
+            android:name=".widget.FlashlightWidgetProvider"
+            android:exported="true"
+            android:label="@string/widget_flashlight_label">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/flashlight_widget_info" />
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

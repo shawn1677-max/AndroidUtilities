@@ -1,7 +1,6 @@
 package com.utilitybox.app.tools.convert
 
 import android.content.Context
-import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -27,6 +26,7 @@ import com.utilitybox.app.ui.common.CopyableResult
 import com.utilitybox.app.ui.common.HintText
 import com.utilitybox.app.ui.common.SectionCard
 import com.utilitybox.app.ui.common.ToolScaffold
+import com.utilitybox.app.util.torchCameraId
 import com.utilitybox.app.ui.common.rememberClipboardReader
 import kotlinx.coroutines.delay
 
@@ -173,12 +173,6 @@ internal fun morseToText(morse: String): String =
                 .map { REVERSE_TABLE[it] ?: '?' }
                 .joinToString("")
         }
-
-private fun CameraManager.torchCameraId(): String? = runCatching {
-    cameraIdList.firstOrNull { id ->
-        getCameraCharacteristics(id).get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
-    }
-}.getOrNull()
 
 private fun CameraManager.setTorchSafely(id: String, enabled: Boolean) {
     runCatching { setTorchMode(id, enabled) }

@@ -25,7 +25,7 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Bubble Level | Pitch, roll, total tilt and builder's slope |
 | Screen Ruler | Centimetres or inches, calibrated against a bank card |
 | Sound Meter | Ambient level in dB with history graph and calibration offset |
-| Flashlight | Steady torch, adjustable strobe and an SOS beacon |
+| Flashlight | Steady torch, adjustable strobe and an SOS beacon (also a home screen widget) |
 | Stopwatch | Millisecond timing with laps and splits |
 | Countdown Timer | Presets, fine adjustment and an alarm-stream alert |
 | Metronome | 30–260 BPM, accented downbeat, tap tempo |
@@ -60,6 +60,18 @@ device, so nothing it measures, generates or reads can leave the phone.
 | BMI Calculator | Metric or imperial, with the healthy range for your height |
 | Password Generator | Random passwords and passphrases with honest entropy estimates |
 | Random Picker | Numbers, dice, coins, list picking and shuffling |
+
+## Home screen widget
+
+A one-cell **Flashlight** widget toggles the torch without opening the app.
+
+Because the torch is a shared system resource — the in-app tool, the quick
+settings tile and other apps can all change it — a tap reads the real torch
+state from the camera service rather than trusting a remembered flag, then
+toggles from that. A widget showing a stale icon therefore does the right
+thing on the first tap instead of appearing to do nothing.
+
+The widget adds no permissions: `CameraManager.setTorchMode` needs none.
 
 ## Settings
 
@@ -141,6 +153,7 @@ app/src/main/java/com/utilitybox/app/
 │   └── calculate/           calculators
 ├── ui/common/               shared scaffold, cards, rows, permission gate
 ├── ui/settings/             settings screen (appearance, about)
+├── widget/                  home screen flashlight widget
 ├── ui/theme/                Material 3 theme, dynamic colour, theme preference
 └── util/                    formatting, audio engines, screen-on helper
 ```

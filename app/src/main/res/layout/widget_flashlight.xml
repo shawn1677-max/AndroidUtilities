@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Deliberately icon-only: the widget occupies a single 1x1 cell, which leaves
+  no room for a legible caption alongside a tappable icon.
+-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background_off"
+    android:contentDescription="@string/widget_flashlight_label"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/widget_icon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:contentDescription="@string/widget_flashlight_label"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_widget_flashlight_off" />
+</FrameLayout>
