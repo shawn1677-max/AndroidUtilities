@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  The readout is two overlapping views rather than one.
+
+  A Chronometer ticks itself on the launcher, which is the only way a widget can
+  show a running clock — widgets cannot be redrawn once a second from the app.
+  But a Chronometer renders "now minus base", so a paused reading drawn that way
+  drifts by however long the launcher takes to apply the update. The paused value
+  is therefore drawn as exact text instead, and only one of the two is ever shown.
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widget_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/widget_background_off"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="14dp"
+    android:paddingEnd="6dp">
+
+    <FrameLayout
+        android:id="@+id/widget_readout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <Chronometer
+            android:id="@+id/widget_chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:textColor="#FFE1E3E1"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/widget_static_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/widget_stopwatch_zero"
+            android:textColor="#FFE1E3E1"
+            android:textSize="22sp" />
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/widget_toggle"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:background="@drawable/widget_button_background"
+        android:contentDescription="@string/widget_stopwatch_start"
+        android:padding="10dp"
+        android:src="@drawable/ic_widget_play" />
+
+    <ImageView
+        android:id="@+id/widget_reset"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/widget_button_background"
+        android:contentDescription="@string/widget_stopwatch_reset"
+        android:padding="11dp"
+        android:src="@drawable/ic_widget_reset" />
+</LinearLayout>

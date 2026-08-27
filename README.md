@@ -26,7 +26,7 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Screen Ruler | Centimetres or inches, calibrated against a bank card |
 | Sound Meter | Ambient level in dB with history graph and calibration offset |
 | Flashlight | Steady torch, adjustable strobe and an SOS beacon (also a home screen widget) |
-| Stopwatch | Millisecond timing with laps and splits |
+| Stopwatch | Millisecond timing with laps and splits (also a home screen widget) |
 | Countdown Timer | Presets, fine adjustment and an alarm-stream alert |
 | Metronome | 30–260 BPM, accented downbeat, tap tempo |
 
@@ -61,9 +61,9 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Password Generator | Random passwords and passphrases with honest entropy estimates |
 | Random Picker | Numbers, dice, coins, list picking and shuffling |
 
-## Home screen widget
+## Home screen widgets
 
-A one-cell **Flashlight** widget toggles the torch without opening the app.
+**Flashlight** — a one-cell widget that toggles the torch without opening the app.
 
 Because the torch is a shared system resource — the in-app tool, the quick
 settings tile and other apps can all change it — a tap reads the real torch
@@ -72,6 +72,18 @@ toggles from that. A widget showing a stale icon therefore does the right
 thing on the first tap instead of appearing to do nothing.
 
 The widget adds no permissions: `CameraManager.setTorchMode` needs none.
+
+**Stopwatch** — start, pause and reset from the home screen; tapping the
+reading opens the full tool where the laps are.
+
+It is the *same* stopwatch as the in-app one, not a second copy: both read and
+write `StopwatchStore`, so starting it on the home screen and pausing it in the
+app behaves as one timer.
+
+A widget cannot be redrawn once a second, so the running reading is drawn by a
+`Chronometer`, which ticks itself inside the launcher with no app process
+involved — only start, pause and reset cost a redraw. That is also why the
+widget shows whole seconds while the in-app screen shows hundredths.
 
 ## Settings
 
@@ -153,7 +165,7 @@ app/src/main/java/com/utilitybox/app/
 │   └── calculate/           calculators
 ├── ui/common/               shared scaffold, cards, rows, permission gate
 ├── ui/settings/             settings screen (appearance, about)
-├── widget/                  home screen flashlight widget
+├── widget/                  home screen widgets (flashlight, stopwatch)
 ├── ui/theme/                Material 3 theme, dynamic colour, theme preference
 └── util/                    formatting, audio engines, screen-on helper
 ```
@@ -168,7 +180,7 @@ that the id constants and the registry stay in step.
 - Single activity, Navigation Compose, no third-party analytics or ad SDKs
 - CameraX and ZXing for barcode scanning and generation (both used offline)
 - minSdk 24, targetSdk 36, R8 with resource shrinking on release
-- 46 unit tests covering unit conversion, Morse, formatting, theme resolution and the registry
+- 59 unit tests covering unit conversion, Morse, formatting, theme resolution, stopwatch timing and the registry
 
 ## Licence
 
