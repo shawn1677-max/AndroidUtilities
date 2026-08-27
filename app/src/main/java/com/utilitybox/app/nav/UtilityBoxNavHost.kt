@@ -6,11 +6,13 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.utilitybox.app.tools.ToolIds
+import com.utilitybox.app.tools.ToolRegistry
 import com.utilitybox.app.tools.calculate.BmiScreen
 import com.utilitybox.app.tools.calculate.DateCalculatorScreen
 import com.utilitybox.app.tools.calculate.PasswordScreen
@@ -51,8 +53,21 @@ private const val SETTINGS = "settings"
 private const val TRANSITION_MS = 220
 
 @Composable
-fun UtilityBoxNavHost() {
+fun UtilityBoxNavHost(
+    openTool: String? = null,
+    onToolOpened: () -> Unit = {},
+) {
     val navController = rememberNavController()
+
+    // A widget can ask for a specific tool. The id is validated against the
+    // registry so an unknown or malformed extra simply does nothing.
+    LaunchedEffect(openTool) {
+        val tool = openTool?.let { ToolRegistry.find(it) }
+        if (tool != null) {
+            navController.navigateToTool(tool.id)
+            onToolOpened()
+        }
+    }
 
     NavHost(
         navController = navController,
