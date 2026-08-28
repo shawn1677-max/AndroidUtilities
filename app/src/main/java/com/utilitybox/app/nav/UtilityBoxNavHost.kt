@@ -14,10 +14,12 @@ import androidx.navigation.compose.rememberNavController
 import com.utilitybox.app.tools.ToolIds
 import com.utilitybox.app.tools.ToolRegistry
 import com.utilitybox.app.tools.calculate.BmiScreen
+import com.utilitybox.app.tools.calculate.CalculatorScreen
 import com.utilitybox.app.tools.calculate.DateCalculatorScreen
 import com.utilitybox.app.tools.calculate.PasswordScreen
 import com.utilitybox.app.tools.calculate.PercentageScreen
 import com.utilitybox.app.tools.calculate.RandomScreen
+import com.utilitybox.app.tools.calculate.TallyScreen
 import com.utilitybox.app.tools.calculate.TipScreen
 import com.utilitybox.app.tools.convert.Base64Screen
 import com.utilitybox.app.tools.convert.BaseConverterScreen
@@ -26,8 +28,10 @@ import com.utilitybox.app.tools.convert.HashScreen
 import com.utilitybox.app.tools.convert.MorseScreen
 import com.utilitybox.app.tools.convert.QrGeneratorScreen
 import com.utilitybox.app.tools.convert.QrScannerScreen
+import com.utilitybox.app.tools.convert.TextReaderScreen
 import com.utilitybox.app.tools.convert.TextToolsScreen
 import com.utilitybox.app.tools.convert.UnitConverterScreen
+import com.utilitybox.app.tools.convert.WorldClockScreen
 import com.utilitybox.app.tools.device.AppInventoryScreen
 import com.utilitybox.app.tools.device.BatteryScreen
 import com.utilitybox.app.tools.device.DeviceInfoScreen
@@ -38,9 +42,12 @@ import com.utilitybox.app.tools.hardware.ScreenTestScreen
 import com.utilitybox.app.tools.hardware.ToneGeneratorScreen
 import com.utilitybox.app.tools.hardware.TouchTestScreen
 import com.utilitybox.app.tools.hardware.VibrationTestScreen
+import com.utilitybox.app.tools.measure.BarometerScreen
 import com.utilitybox.app.tools.measure.CompassScreen
 import com.utilitybox.app.tools.measure.FlashlightScreen
 import com.utilitybox.app.tools.measure.LevelScreen
+import com.utilitybox.app.tools.measure.LightMeterScreen
+import com.utilitybox.app.tools.measure.MagnifierScreen
 import com.utilitybox.app.tools.measure.MetronomeScreen
 import com.utilitybox.app.tools.measure.RulerScreen
 import com.utilitybox.app.tools.measure.SoundMeterScreen
@@ -103,6 +110,9 @@ fun UtilityBoxNavHost(
         composable(ToolIds.LEVEL) { LevelScreen(back) }
         composable(ToolIds.RULER) { RulerScreen(back) }
         composable(ToolIds.SOUND_METER) { SoundMeterScreen(back) }
+        composable(ToolIds.BAROMETER) { BarometerScreen(back) }
+        composable(ToolIds.LIGHT_METER) { LightMeterScreen(back) }
+        composable(ToolIds.MAGNIFIER) { MagnifierScreen(back) }
         composable(ToolIds.FLASHLIGHT) { FlashlightScreen(back) }
         composable(ToolIds.STOPWATCH) { StopwatchScreen(back) }
         composable(ToolIds.TIMER) { TimerScreen(back) }
@@ -122,6 +132,8 @@ fun UtilityBoxNavHost(
         composable(ToolIds.MORSE) { MorseScreen(back) }
         composable(ToolIds.QR_GENERATE) { QrGeneratorScreen(back) }
         composable(ToolIds.QR_SCAN) { QrScannerScreen(back) }
+        composable(ToolIds.WORLD_CLOCK) { WorldClockScreen(back) }
+        composable(ToolIds.TEXT_READER) { TextReaderScreen(back) }
 
         composable(ToolIds.TIP) { TipScreen(back) }
         composable(ToolIds.PERCENTAGE) { PercentageScreen(back) }
@@ -129,6 +141,8 @@ fun UtilityBoxNavHost(
         composable(ToolIds.BMI) { BmiScreen(back) }
         composable(ToolIds.PASSWORD) { PasswordScreen(back) }
         composable(ToolIds.RANDOM) { RandomScreen(back) }
+        composable(ToolIds.CALCULATOR) { CalculatorScreen(back) }
+        composable(ToolIds.TALLY) { TallyScreen(back) }
     }
 }
 

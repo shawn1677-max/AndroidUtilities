@@ -1,27 +1,35 @@
 package com.utilitybox.app.tools
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Air
 import androidx.compose.material.icons.outlined.Apps
 import androidx.compose.material.icons.outlined.BatteryFull
 import androidx.compose.material.icons.outlined.CalendarMonth
+import androidx.compose.material.icons.outlined.Calculate
 import androidx.compose.material.icons.outlined.Casino
 import androidx.compose.material.icons.outlined.Code
 import androidx.compose.material.icons.outlined.ColorLens
 import androidx.compose.material.icons.outlined.Explore
+import androidx.compose.material.icons.outlined.Exposure
 import androidx.compose.material.icons.outlined.FlashlightOn
 import androidx.compose.material.icons.outlined.Gradient
 import androidx.compose.material.icons.outlined.GraphicEq
 import androidx.compose.material.icons.outlined.HourglassEmpty
 import androidx.compose.material.icons.outlined.Key
+import androidx.compose.material.icons.outlined.LightMode
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.MonitorHeart
 import androidx.compose.material.icons.outlined.MusicNote
 import androidx.compose.material.icons.outlined.Numbers
+import androidx.compose.material.icons.outlined.Public
 import androidx.compose.material.icons.outlined.Percent
+import androidx.compose.material.icons.outlined.PlusOne
 import androidx.compose.material.icons.outlined.PhoneAndroid
 import androidx.compose.material.icons.outlined.QrCode2
 import androidx.compose.material.icons.outlined.QrCodeScanner
+import androidx.compose.material.icons.outlined.RecordVoiceOver
 import androidx.compose.material.icons.outlined.Restaurant
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material.icons.outlined.Sensors
 import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.material.icons.outlined.Straighten
@@ -74,6 +82,9 @@ object ToolIds {
     const val LEVEL = "level"
     const val RULER = "ruler"
     const val SOUND_METER = "sound_meter"
+    const val BAROMETER = "barometer"
+    const val LIGHT_METER = "light_meter"
+    const val MAGNIFIER = "magnifier"
     const val FLASHLIGHT = "flashlight"
     const val STOPWATCH = "stopwatch"
     const val TIMER = "timer"
@@ -93,6 +104,8 @@ object ToolIds {
     const val MORSE = "morse"
     const val QR_GENERATE = "qr_generate"
     const val QR_SCAN = "qr_scan"
+    const val WORLD_CLOCK = "world_clock"
+    const val TEXT_READER = "text_reader"
 
     const val TIP = "tip"
     const val PERCENTAGE = "percentage"
@@ -100,6 +113,8 @@ object ToolIds {
     const val BMI = "bmi"
     const val PASSWORD = "password"
     const val RANDOM = "random"
+    const val CALCULATOR = "calculator"
+    const val TALLY = "tally"
 }
 
 object ToolRegistry {
@@ -165,6 +180,24 @@ object ToolRegistry {
             "Approximate ambient noise level in decibels",
             Icons.Outlined.Mic, ToolCategory.MEASURE,
             listOf("db", "decibel", "noise", "loud", "spl", "microphone"),
+        ),
+        Tool(
+            ToolIds.BAROMETER, "Barometer",
+            "Air pressure, altitude estimate and a weather hint",
+            Icons.Outlined.Air, ToolCategory.MEASURE,
+            listOf("pressure", "hpa", "altitude", "altimeter", "weather", "elevation"),
+        ),
+        Tool(
+            ToolIds.LIGHT_METER, "Light Meter",
+            "Illuminance in lux, with an exposure value",
+            Icons.Outlined.LightMode, ToolCategory.MEASURE,
+            listOf("lux", "brightness", "illuminance", "ev", "photography", "exposure"),
+        ),
+        Tool(
+            ToolIds.MAGNIFIER, "Magnifier",
+            "Zoom in on small print with the camera",
+            Icons.Outlined.Search, ToolCategory.MEASURE,
+            listOf("zoom", "magnify", "reading", "small print", "loupe", "camera"),
         ),
         Tool(
             ToolIds.FLASHLIGHT, "Flashlight",
@@ -265,12 +298,36 @@ object ToolRegistry {
             listOf("barcode", "share", "link", "url", "wifi"),
         ),
         Tool(
+            ToolIds.WORLD_CLOCK, "World Clock",
+            "Times around the world, and what they will be later",
+            Icons.Outlined.Public, ToolCategory.CONVERT,
+            listOf("time zone", "timezone", "utc", "gmt", "city", "abroad", "meeting"),
+        ),
+        Tool(
+            ToolIds.TEXT_READER, "Text Reader",
+            "Read text aloud with the on-device voice",
+            Icons.Outlined.RecordVoiceOver, ToolCategory.CONVERT,
+            listOf("speech", "tts", "read aloud", "voice", "speak", "accessibility"),
+        ),
+        Tool(
             ToolIds.QR_SCAN, "QR Scanner",
             "Read QR codes and barcodes with the camera",
             Icons.Outlined.QrCodeScanner, ToolCategory.CONVERT,
             listOf("barcode", "scan", "camera", "read", "ean", "upc"),
         ),
 
+        Tool(
+            ToolIds.CALCULATOR, "Calculator",
+            "Type an expression with brackets and powers",
+            Icons.Outlined.Calculate, ToolCategory.CALCULATE,
+            listOf("maths", "math", "arithmetic", "sum", "multiply", "divide", "brackets"),
+        ),
+        Tool(
+            ToolIds.TALLY, "Tally Counter",
+            "Named counters that remember their totals",
+            Icons.Outlined.PlusOne, ToolCategory.CALCULATE,
+            listOf("count", "counter", "clicker", "score", "stock take", "tally"),
+        ),
         Tool(
             ToolIds.TIP, "Tip Calculator",
             "Split a bill and work out the tip",

@@ -1,6 +1,6 @@
 # Utility Box
 
-An offline Android toolbox: 30 practical utilities in one small app, built with
+An offline Android toolbox: 40 practical utilities in one small app, built with
 Kotlin and Jetpack Compose.
 
 The app has **no internet permission at all**. Every tool runs entirely on the
@@ -25,6 +25,9 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Bubble Level | Pitch, roll, total tilt and builder's slope |
 | Screen Ruler | Centimetres or inches, calibrated against a bank card |
 | Sound Meter | Ambient level in dB with history graph and calibration offset |
+| Barometer | Air pressure, altitude estimate and a weather hint |
+| Light Meter | Illuminance in lux, foot-candles and an exposure value |
+| Magnifier | Zoom in on small print through the camera |
 | Flashlight | Steady torch, adjustable strobe and an SOS beacon (also a home screen widget) |
 | Stopwatch | Millisecond timing with laps and splits (also a home screen widget) |
 | Countdown Timer | Presets, fine adjustment and an alarm-stream alert |
@@ -50,10 +53,14 @@ device, so nothing it measures, generates or reads can leave the phone.
 | Morse Code | Text to Morse and back, optionally flashed on the torch |
 | QR Generator | Text, links, phone numbers and Wi-Fi credentials |
 | QR Scanner | QR, Data Matrix, Aztec, EAN, UPC, Code 128, Code 39, ITF |
+| World Clock | Times around the world, and what they will be later |
+| Text Reader | Reads text aloud with the on-device voice |
 
 ### Calculate
 | Tool | What it does |
 | --- | --- |
+| Calculator | Expressions with brackets, powers and implied multiplication |
+| Tally Counter | Named counters that remember their totals |
 | Tip Calculator | Tip, total, bill splitting and round-up |
 | Percentages | Percent of, what percent, change, discount and mark-up |
 | Date Calculator | Days between dates, date arithmetic, working days |
@@ -180,7 +187,7 @@ that the id constants and the registry stay in step.
 - Single activity, Navigation Compose, no third-party analytics or ad SDKs
 - CameraX and ZXing for barcode scanning and generation (both used offline)
 - minSdk 24, targetSdk 36, R8 with resource shrinking on release
-- 59 unit tests covering unit conversion, Morse, formatting, theme resolution, stopwatch timing and the registry
+- 87 unit tests covering the expression evaluator, unit conversion, Morse, formatting, theme resolution, stopwatch timing, time zones and the registry
 
 ## Licence
 
